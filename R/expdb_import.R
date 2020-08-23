@@ -109,15 +109,15 @@ dbImportXLSX <- function(con, xlsx, ignore_genotype = TRUE,
         }
     }
 
-    # Import apsoil
-    if (!is.null(sheets$apsoils) & !is.null(other_args$apsoil))
-    {
-        apsoil <- sheets$apsoils
-        if (nrow(apsoil) > 0)
-        {
-            addApsoils(con, apsoil, other_args$apsoil)
-        }
-    }
+    # # Import apsoil
+    # if (!is.null(sheets$apsoils) & !is.null(other_args$apsoil))
+    # {
+    #     apsoil <- sheets$apsoils
+    #     if (nrow(apsoil) > 0)
+    #     {
+    #         addApsoils(con, apsoil, other_args$apsoil)
+    #     }
+    # }
 
     # Import sites
     if (!is.null(sheets$sites))
