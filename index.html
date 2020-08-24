@@ -47,18 +47,6 @@
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="articles/expdb.html">Storage and Analysis of Agricultural Experiments</a>
-    </li>
-  </ul>
-</li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
@@ -79,12 +67,98 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
+
 <div id="expdb" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#expdb" class="anchor"></a>expDB</h1></div>
 
 <p>R interface for expDB which is used to store experiment-based data.</p>
 </div>
+<div id="introduction" class="section level1">
+<h1 class="hasAnchor">
+<a href="#introduction" class="anchor"></a>Introduction</h1>
+<div id="database-design" class="section level2">
+<h2 class="hasAnchor">
+<a href="#database-design" class="anchor"></a>Database design</h2>
+<p>A <a href="http://www.sqlite.org">SQLite</a> database is used to store all information of experiment-based data.</p>
+<ul>
+<li><p>Researchers collect the basic information about researchers, e.g. name, email, etc.</p></li>
+<li><p>ApSoils specify the soil name in the ApSoils which distribute with <a href="http://www.apsim.info">APSIM</a>.</p></li>
+<li><p>Sites collect the basic information about experiment fields, e.g. name, latitude, longitude, soil, etc. The soil must be the same in the table ApSoils.</p></li>
+<li><p>Met specify the information about weather records, e.g. type and filename. The valid met types include “daily” and “hourly”.</p></li>
+<li><p>Genotypes collect genotype name and other information.</p></li>
+<li><p>Traits collect all information about traits, e.g. name, type, label, unit and description. There aren’t limitation of trait names and types. But we normally use crop and soil as trait types.</p></li>
+<li><p>Trials collect basic information about trials, e.g. year, site, trial code (trialcode), sowing, density, depth, row spacing (rowspacing) and researcher and met. Trial code must be unique for expDB. Site should come from table Sites.</p></li>
+<li><p>Design specify the design of each plot, e.g. year, trialcode, site, row (range), column (plot), replicate, block, treatment, genotype, etc. Each plot specifies by year, site, row, column which must be unique. The trialcode is from table Trials, site from table Sites, and genotype from table Genotypes.</p></li>
+<li><p>TrialSoils collect the soil information to some trials, e.g. trial code, bulk density, no3-n, nh4-n, etc.</p></li>
+<li><p>Irrigation collect the irrigation information to some trials, e.g. date, amount, etc.</p></li>
+<li><p>Fertilization collect the fertilization information to some trials, e.g. date, fertilizer, amount, etc.</p></li>
+</ul>
+</div>
+<div id="import-data" class="section level2">
+<h2 class="hasAnchor">
+<a href="#import-data" class="anchor"></a>Import data</h2>
+<p>The experiment-based data can be imported from a excel file which supports by <a href="https://cran.r-project.org/web/packages/readxl/index.html">readxl</a> package. expDB is case-insensitive. The Australia style should be used for all date related fields (dd/mm/yyyy).</p>
+</div>
+<div id="traits" class="section level2">
+<h2 class="hasAnchor">
+<a href="#traits" class="anchor"></a>Traits</h2>
+<p>The processes of plant growth and development can be classified into several hierarchical levels, e.g. biosphere, ecosystem or cropping system, field or plot, whole plant, plant organ, cell, molecule, atom, and subatomic particle (Hodges 1991). We could collect data from field, plant, organ in an agricultural experiment. The values in the higher levels can be derived from lower levels. In most cases, we don’t directly record data in levels above, but through specific protocol. These observations are used to derive values in other levels. For example, population is converted from the establishment counts; dry weights of leaves, stems, and heads are converted from quadrat harvest. An extra level, measurement is added into the convention.</p>
+<table class="table">
+<thead><tr class="header">
+<th>Levels</th>
+<th>Prefix</th>
+<th>Example</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Field</td>
+<td>F_</td>
+<td>F_StemNumber</td>
+</tr>
+<tr class="even">
+<td>Plant</td>
+<td>P_</td>
+<td>P_StemNumber</td>
+</tr>
+<tr class="odd">
+<td>Organ</td>
+<td>O_</td>
+<td>O_LeafArea</td>
+</tr>
+<tr class="even">
+<td>Measurement</td>
+<td>M_</td>
+<td>M_DryWeightGreenLeaf</td>
+</tr>
+</tbody>
+</table>
+<p>A list of traits are provided in the released version of expDB.</p>
+</div>
+<div id="extraction-of-observations-from-datasets" class="section level2">
+<h2 class="hasAnchor">
+<a href="#extraction-of-observations-from-datasets" class="anchor"></a>Extraction of observations from datasets</h2>
+<p>The low level function <code>dbGetPhenotype</code> is provided to extract the raw observations from database. Some traits can be observed or calculated from other traits.</p>
+<div id="population" class="section level3">
+<h3 class="hasAnchor">
+<a href="#population" class="anchor"></a>Population</h3>
+<p>The plant population (<code>F_Population</code>) is defined as the number of plants in unit area. <code>F_Population</code> is retrived from database, then calculated from measurement establishment count (<code>M_EstablishmentCount</code>) and row spacing (<code>RowSpacing</code>). The density is assumed to equal to population if none of above traits are specified in the database.</p>
+</div>
+<div id="final-leaf-number" class="section level3">
+<h3 class="hasAnchor">
+<a href="#final-leaf-number" class="anchor"></a>Final leaf number</h3>
+<p>Final leaf number (<code>O_FinalLeafNumber</code>) is defined as the total completed leaf number of a fertile stem after head emergence (main stem and tillers). <code>O_FinalLeafNumber</code> is retrived from database, then calculated from Haun Index. Huan Index is assumed the full expanded flag leaf is recorded. Consequently the maximum integer value in the observations is treated as the <code>O_FinalLeafNumber</code>.</p>
+</div>
+<div id="stemtiller-numbers-for-field-and-plant" class="section level3">
+<h3 class="hasAnchor">
+<a href="#stemtiller-numbers-for-field-and-plant" class="anchor"></a>Stem/tiller numbers for field and plant</h3>
+<p>The stem/tiller numbers are defined as the number stems/tillers per unit area and per plant. The relationships among 4 traits are as follows.</p>
+<p><br><span class="math display"><em>P</em>_<em>S</em><em>t</em><em>e</em><em>m</em><em>N</em><em>u</em><em>m</em><em>b</em><em>e</em><em>r</em> = <em>P</em>_<em>T</em><em>i</em><em>l</em><em>l</em><em>e</em><em>r</em><em>N</em><em>u</em><em>m</em><em>b</em><em>e</em><em>r</em> + 1</span><br><br><span class="math display"><em>F</em>_<em>S</em><em>t</em><em>e</em><em>m</em><em>N</em><em>u</em><em>m</em><em>b</em><em>e</em><em>r</em> = <em>P</em>_<em>S</em><em>t</em><em>e</em><em>m</em><em>N</em><em>u</em><em>m</em><em>b</em><em>e</em><em>r</em> × <em>F</em>_<em>P</em><em>o</em><em>p</em><em>u</em><em>l</em><em>a</em><em>t</em><em>i</em><em>o</em><em>n</em></span><br><br><span class="math display"><em>F</em>_<em>T</em><em>i</em><em>l</em><em>l</em><em>e</em><em>r</em><em>N</em><em>u</em><em>m</em><em>b</em><em>e</em><em>r</em> = <em>P</em>_<em>T</em><em>i</em><em>l</em><em>l</em><em>e</em><em>r</em><em>N</em><em>u</em><em>m</em><em>b</em><em>e</em><em>r</em> × <em>F</em>_<em>P</em><em>o</em><em>p</em><em>u</em><em>l</em><em>a</em><em>t</em><em>i</em><em>o</em><em>n</em></span><br><br><span class="math display"><em>F</em>_<em>S</em><em>t</em><em>e</em><em>m</em><em>N</em><em>u</em><em>m</em><em>b</em><em>e</em><em>r</em> = (<em>P</em>_<em>T</em><em>i</em><em>l</em><em>l</em><em>e</em><em>r</em><em>N</em><em>u</em><em>m</em><em>b</em><em>e</em><em>r</em> + 1) × <em>F</em>_<em>P</em><em>o</em><em>p</em><em>u</em><em>l</em><em>a</em><em>t</em><em>i</em><em>o</em><em>n</em></span><br></p>
+<p>The stem/tiller numbers are retrived from observations, then calculated by other traits.</p>
+</div>
+</div>
+</div>
+
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
