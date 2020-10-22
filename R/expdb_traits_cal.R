@@ -46,7 +46,7 @@ dbGetOrganFinalLeafNumber <- function(con, trials = NULL, ...) {
     fln_avg <- fln %>%
         dplyr::group_by_(.dots = c(trt_cols, 'node')) %>%
       dplyr::summarise(std = stats::sd(.data$value),
-                  value = mean(.data$value)) %>%
+                  value = mean(.data$value), .groups = "drop") %>%
       dplyr::ungroup() %>%
       dplyr::distinct() %>%
       dplyr::mutate(traits = 'O_FinalLeafNumber',
@@ -61,14 +61,14 @@ dbGetOrganFinalLeafNumber <- function(con, trials = NULL, ...) {
             trials = trials,
             traits = 'O_HaunIndex')
         fln2 <- haun_index %>%
-          dplyr::group_by(dplyr::all_of(c('column', 'row', 'site', 'year', 'sample', 'node'))) %>%
+          dplyr::group_by_(.dots = c('column', 'row', 'site', 'year', 'sample', 'node')) %>%
           dplyr::filter(sum(.data$value == max(.data$value)) > 1) %>% 
             dplyr::filter(.data$value == max(.data$value),
                    .data$date == max(.data$date)) %>%
             # filter(value == round(value)) %>%
           dplyr::group_by_(.dots = c(trt_cols, 'node')) %>%
           dplyr::summarise(std = stats::sd(.data$value),
-                      value = mean(.data$value)) %>%
+                      value = mean(.data$value), .groups = "drop") %>%
           dplyr::ungroup() %>%
           dplyr::distinct() %>%
           dplyr::mutate(traits = 'O_FinalLeafNumber',
@@ -289,7 +289,7 @@ dbGetFieldMaturity <- function(con, trials = NULL, ...) {
       dplyr::group_by_(.dots = c(trt_cols, 'value')) %>%
       dplyr::summarise(
             date = as.Date(mean(.data$date)),
-            tt = mean(.data$tt)) %>%
+            tt = mean(.data$tt), .groups = "drop") %>%
       dplyr::ungroup()
 
 
@@ -302,7 +302,7 @@ dbGetFieldMaturity <- function(con, trials = NULL, ...) {
       dplyr::summarize(
             date = as.Date(stats::approx(.data$value, .data$date, 95, rule = 2)$y,
                            origin = '1970-1-1'),
-            tt = stats::approx(.data$value, .data$tt, 95, rule = 2)$y)
+            tt = stats::approx(.data$value, .data$tt, 95, rule = 2)$y, .groups = "drop")
 
 
 }
@@ -435,7 +435,7 @@ dbGetZadoksStage <- function(con, trials, key_stage) {
                   dplyr::ungroup() %>%
                   dplyr::select_(.dots = trt_cols) %>%
                   dplyr::mutate(date = key_date,
-                           tt = .data$key_stage_tt - sowing_tt, 
+                           tt = key_stage_tt - sowing_tt, 
                            value = key_stage[i])
                 
             }
