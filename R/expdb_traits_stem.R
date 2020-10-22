@@ -171,11 +171,11 @@ dbGetDryWeightPerStem <- function(con, trials = NULL, ...) {
     
     stem_number <- dbGetFieldStemNumber(con, trials2) %>% 
         dplyr::rename(sn = .data$value) %>% 
-        dplyr::select(!dplyr::all_of('std', 'traits', 'source')) 
+        dplyr::select(!dplyr::all_of(c('std', 'traits', 'source'))) 
     obs2 <- stem_number %>% 
         dplyr::left_join(dry_weight, by = intersect(names(stem_number), names(dry_weight))) %>% 
         dplyr::mutate(value = .data$dw / .data$sn) %>% 
-        dplyr::select(!dplyr::all_of('sn', 'dw')) %>% 
+        dplyr::select(!dplyr::all_of(c('sn', 'dw'))) %>% 
         dplyr::mutate(source = 'estimation')
     dplyr::full_join(obs, obs2, by = intersect(names(obs), names(obs2)))
 }

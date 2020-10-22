@@ -61,7 +61,7 @@ dbGetOrganFinalLeafNumber <- function(con, trials = NULL, ...) {
             trials = trials,
             traits = 'O_HaunIndex')
         fln2 <- haun_index %>%
-          dplyr::group_by(dplyr::all_of('column', 'row', 'site', 'year', 'sample', 'node')) %>%
+          dplyr::group_by(dplyr::all_of(c('column', 'row', 'site', 'year', 'sample', 'node'))) %>%
           dplyr::filter(sum(.data$value == max(.data$value)) > 1) %>% 
             dplyr::filter(.data$value == max(.data$value),
                    .data$date == max(.data$date)) %>%
@@ -175,7 +175,7 @@ dbGetFieldPopulation <- function(con, trials = NULL, ...) {
         tt = FALSE, gene = FALSE) %>%
         dplyr::select(!dplyr::all_of('date'))
     population <- trials %>%
-      dplyr::select(dplyr::all_of('column', 'row', 'site', 'year')) %>%
+      dplyr::select(dplyr::all_of(c('column', 'row', 'site', 'year'))) %>%
       dplyr::left_join(obs, by = c('year', 'site', 'column', 'row')) %>%
       dplyr::filter(!is.na(.data$traits)) %>%
       dplyr::group_by_(.dots = trt_cols) %>%
@@ -187,7 +187,7 @@ dbGetFieldPopulation <- function(con, trials = NULL, ...) {
     est_trial <- trials %>%
       dplyr::anti_join(
             population %>%
-                dplyr::select(!dplyr::all_of('value', 'std')),
+                dplyr::select(!dplyr::all_of(c('value', 'std'))),
             by = trt_cols)
     # Get observations
     est_count <- dbGetPhenotype_(
@@ -206,7 +206,7 @@ dbGetFieldPopulation <- function(con, trials = NULL, ...) {
     other_trials <- est_trial %>%
       dplyr::anti_join(
             est_count %>%
-              dplyr::select(!dplyr::all_of('value', 'std')),
+              dplyr::select(!dplyr::all_of(c('value', 'std'))),
             by = trt_cols) %>%
       dplyr::mutate(traits = 'F_Population',
                value = .data$density) %>%
@@ -330,7 +330,7 @@ dbGetZadoksStage <- function(con, trials, key_stage) {
       dplyr::group_by(.dots = c(trt_cols, 'value')) %>%
       dplyr::summarise(
             date = as.Date(mean(.data$date)),
-            tt = mean(.data$tt)) %>%
+            tt = mean(.data$tt), .groups = "drop") %>%
       dplyr::ungroup()
 
     res <- list()
@@ -391,7 +391,7 @@ dbGetZadoksStage <- function(con, trials, key_stage) {
             warning('The key stage is estimated by linear regression and may not be accurate')
             phenotype2_nom <- res12 %>% 
               dplyr::rename(key_state_tt = .data$tt) %>% 
-              dplyr::select(!dplyr::all_of('value', 'date')) %>% 
+              dplyr::select(!dplyr::all_of(c('value', 'date'))) %>% 
               dplyr::left_join(obs, by = trt_cols) %>% 
               dplyr::mutate(tt_nom = .data$tt - .data$key_state_tt) 
             lm_tt <- stats::lm(tt_nom ~ value, phenotype2_nom)

@@ -200,7 +200,7 @@ WHERE G.[name] %s
         names(phenotype) <- gsub('value.', '', names(phenotype))
     }
     phenotype <- phenotype %>%
-        tibble::tibble %>%
+        tibble::tibble() %>%
         dplyr::mutate(das = as.numeric(.data$date) - as.numeric(.data$sowing))
     
     # Convert nodes into stem and rank
@@ -232,7 +232,7 @@ WHERE G.[name] %s
                                             'MainStem', .data$node)) %>% 
                 dplyr::rename(parent = .data$node,
                               fln = .data$value) %>% 
-                dplyr::select(!dplyr::all_of('traits', 'source', 'std'))
+                dplyr::select(!dplyr::all_of(c('traits', 'source', 'std')))
             phe_neg_rank <- phe_neg_rank %>% 
                 dplyr::left_join(nodes_heritage, by = 'node') %>% 
                 dplyr::left_join(fln, by = c(trt_cols, 'parent')) %>% 

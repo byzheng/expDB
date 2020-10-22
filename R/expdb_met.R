@@ -282,7 +282,7 @@ dbGetWeather <- function(con, name, format = 'data_frame', na = NA_character_)
     res <- tibble::tibble(res)
   } else if (format == 'sirius') {
     res <- res %>% 
-      dplyr::select(dplyr::all_of('year', 'day', 'mint', 'maxt', 'rain', 'radn'))
+      dplyr::select(dplyr::all_of(c('year', 'day', 'mint', 'maxt', 'rain', 'radn')))
   }
   return(res)
 }

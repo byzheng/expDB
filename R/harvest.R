@@ -128,7 +128,7 @@ harvestQuadratDetail <- function(con, records)
                       f_dryweightdeathleaf = .data$dryweightdeathleaf,
                       f_specificleafarea = .data$specificleafarea)
         # Only store the selected columns
-        dplyr::select(dplyr::all_of('year', 'site', 'column', 'row', 'date', 
+        dplyr::select(dplyr::all_of(c('year', 'site', 'column', 'row', 'date', 
                'f_stemnumber', 
                'f_headnumber', 
                'f_leafareaindex', 
@@ -143,13 +143,13 @@ harvestQuadratDetail <- function(con, records)
                'f_dryweighthead', 
                'f_dryweightgrain',
                'f_dryweightdeathleaf',
-               'f_specificleafarea')) %>% 
+               'f_specificleafarea'))) %>% 
         dplyr::mutate(o_dryweightperstem = .data$f_dryweightaboveground / .data$f_stemnumber,
 			   f_dryweightabovegroundnodeadleaf = .data$f_dryweightgreenleaf + .data$f_dryweightstem + .data$f_dryweighthead,
 			   f_dryweightaboveground = .data$f_dryweightgreenleaf + .data$f_dryweightstem + .data$f_dryweighthead + .data$f_dryweightdeathleaf
 ) %>% 
         # Convert into key value format
-        tidyr::gather('traits', 'value', !dplyr::all_of('year', 'site', 'column', 'row', 'date')) %>% 
+        tidyr::gather('traits', 'value', !dplyr::all_of(c('year', 'site', 'column', 'row', 'date'))) %>% 
         # Set the quality
         dplyr::mutate(quality = 0) %>% 
         as.data.frame(stringsAsFactors = FALSE) 
@@ -256,10 +256,10 @@ measurementLeafSize <- function(con, phenotype) {
                o_freshweightgreenleaf = .data$m_ls_freshweightorgan / .data$m_ls_leafnumber,
                o_dryweightgreenleaf = .data$m_ls_dryweightorgan / .data$m_ls_leafnumber,
                o_specificleafarea = .data$o_leafarea / .data$o_dryweightgreenleaf) %>% 
-        dplyr::select(dplyr::all_of('year', 'site', 'column', 'row', 'node', 'date', 'o_leafarea',
-               'o_freshweightgreenleaf', 'o_dryweightgreenleaf', 'o_specificleafarea')) %>% 
+        dplyr::select(dplyr::all_of(c('year', 'site', 'column', 'row', 'node', 'date', 'o_leafarea',
+               'o_freshweightgreenleaf', 'o_dryweightgreenleaf', 'o_specificleafarea'))) %>% 
         # Convert into key value format
-        tidyr::gather('traits', 'value', !dplyr::all_of('year', 'site', 'column', 'row', 'node', 'date')) %>% 
+        tidyr::gather('traits', 'value', !dplyr::all_of(c('year', 'site', 'column', 'row', 'node', 'date'))) %>% 
         # Set the quality
         dplyr::mutate(quality = 0) %>% 
         as.data.frame(stringsAsFactors = FALSE) 

@@ -205,7 +205,7 @@ dbGetGenotype <- function(con, name_only = FALSE)
             dplyr::full_join(
                 genotypes %>% 
                     dplyr::filter(is.na(.data$gene)) %>% 
-                    dplyr::select(dplyr::all_of('crop', 'genotype')),
+                    dplyr::select(dplyr::all_of(c('crop', 'genotype'))),
                 by = c('genotype', 'crop')
             ) %>% tibble::tibble()
         
