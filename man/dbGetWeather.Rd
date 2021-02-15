@@ -11,7 +11,7 @@ dbGetWeather(con, name, format = "data_frame", na = NA_character_)
 
 \item{name}{The met name}
 
-\item{format}{The format of export dataset}
+\item{format}{The format of export dataset.}
 
 \item{na}{The character for missing value with default NA}
 }
