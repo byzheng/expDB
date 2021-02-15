@@ -234,7 +234,9 @@ dbAddWeather <- function(con, data, name=NULL)
         if (!tibble::has_name(records, "temperature")) {
             warning("missing the temperature column in hourly climate")
         } 
-        records$timestamp <- as.POSIXct(records$timestamp)
+        if (!("POSIXct" %in% class(records$timestamp))) {
+            stop("timestamp column should be class POSIXct")
+        }
         if (sum(is.na(records$timestamp)) > 0 ) {
             stop("Missing values in the timestamp column")
         }
@@ -258,7 +260,7 @@ dbAddWeather <- function(con, data, name=NULL)
 #' Get weather records from expDB
 #' @param con a connection object as produced by dbConnect
 #' @param name The met name
-#' @param format The format of export dataset
+#' @param format The format of export dataset.
 #' @param na The character for missing value with default NA
 #' @export
 dbGetWeather <- function(con, name, format = 'data_frame', na = NA_character_)
@@ -274,43 +276,56 @@ dbGetWeather <- function(con, name, format = 'data_frame', na = NA_character_)
         FROM expdb_met M LEFT OUTER JOIN expdb_met_file F ON 
         M.[file_id]=F.[id] WHERE M.id = %s', met_id)
   met_infor <- DBI::dbGetQuery(con, sql)
-  if (met_infor$type == 1)
-  {
-    m <- DBI::dbDriver("SQLite")
-    filename <- file.path(
+  m <- DBI::dbDriver("SQLite")
+  filename <- file.path(
       dirname(dbGetDBName(con)),
       met_infor$filename)
-    conf <- DBI::dbConnect(m, dbname = filename)
-    sql <- sprintf('SELECT * FROM expdb_met_daily WHERE met_id=%s', met_id)
-    res <- DBI::dbGetQuery(conf, sql)
-    DBI::dbDisconnect(conf)
-    res$met_id <- NULL
-  } else
-  {
+  conf <- DBI::dbConnect(m, dbname = filename)
+  if (met_infor$type == 1) {
+      sql <- sprintf('SELECT * FROM expdb_met_daily WHERE met_id=%s', met_id)
+  } else if (met_infor$type == 2 ) {
+      sql <- sprintf('SELECT * FROM expdb_met_hourly WHERE met_id=%s', met_id)
+  } else {
     stop('NOT IMPLEMENTED')
   }
+  res <- DBI::dbGetQuery(conf, sql)
+  DBI::dbDisconnect(conf)
+  res$met_id <- NULL
   if (!is.na(na)) {
     res[is.na(res)] <- na
   }
-  if (format == 'weaana')
-  {
-    res <- weaana::createWeaAna(
-      list(Name = met_infor$name,
-           Number = met_infor$number,
-           Latitude = met_infor$latitude,
-           Longitude = met_infor$longitude,
-           Records = res))
-  } else if (format == 'data_frame')
-  {
-    res$date <- yearDay2Date(res$day, res$year)
-    res$name <- met_infor$name
-    res$number <- met_infor$number
-    res$latitude <- met_infor$latitude
-    res$longitude <- met_infor$longitude
-    res <- tibble::tibble(res)
-  } else if (format == 'sirius') {
-    res <- res %>% 
-      dplyr::select(dplyr::all_of(c('year', 'day', 'mint', 'maxt', 'rain', 'radn')))
+  # Only date frame for hourly data
+  if (met_infor$type == 1 ) {
+      
+      if (format == 'weaana')
+      {
+          res <- weaana::createWeaAna(
+              list(Name = met_infor$name,
+                   Number = met_infor$number,
+                   Latitude = met_infor$latitude,
+                   Longitude = met_infor$longitude,
+                   Records = res))
+      } else if (format == 'data_frame')
+      {
+          res$date <- yearDay2Date(res$day, res$year)
+          res$name <- met_infor$name
+          res$number <- met_infor$number
+          res$latitude <- met_infor$latitude
+          res$longitude <- met_infor$longitude
+          res <- tibble::tibble(res)
+      } else if (format == 'sirius') {
+          res <- res %>% 
+              dplyr::select(dplyr::all_of(c('year', 'day', 'mint', 'maxt', 'rain', 'radn')))
+      }
+  } else {
+      res$timestamp <- as.POSIXct(res$timestamp, 
+                                  origin = as.POSIXct("1970-01-01 00:00.00", tz = "UTC"),
+                                  tz = "UTC")
+      res$name <- met_infor$name
+      res$number <- met_infor$number
+      res$latitude <- met_infor$latitude
+      res$longitude <- met_infor$longitude
+      res <- tibble::tibble(res)
   }
   return(res)
 }

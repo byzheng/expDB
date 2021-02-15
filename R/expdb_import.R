@@ -10,7 +10,11 @@
 #' @param xlsx The path to excel file
 #' @param ignore_genotype Ignore genotype tables when importing
 #' @param ignore_trait Ignore trait table when importing
-#' @param ... Other arguments
+#' @param ... Other arguments. Supported arguments include
+#' \itemize{
+#'    \item{extra_design: Extra columns in the experiment design.}
+#'    \item{tz: The time zone for the hourly climates.}
+#' }
 #' @export
 dbImportXLSX <- function(con, xlsx, ignore_genotype = TRUE,
                          ignore_trait = TRUE, ...)
@@ -78,6 +82,14 @@ dbImportXLSX <- function(con, xlsx, ignore_genotype = TRUE,
                     } else if (mets$type[i] == "hourly") {
                         
                         records <- utils::read.csv(file_paths[i], as.is = TRUE)
+                        if (!tibble::has_name(records, "timestamp")) {
+                            stop("missing the timestamp column in hourly climate")
+                        } 
+                        if (is.null(other_args$tz)) {
+                            stop("Argument tz should be used to hourly temperature")
+                        }
+                        records$timestamp <- as.POSIXct(records$timestamp, tz = other_args$tz)
+                        
                         dbAddWeather(con, records[, c("timestamp", "temperature")],
                                      mets$name[i])
                     }

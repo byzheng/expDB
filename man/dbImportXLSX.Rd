@@ -15,7 +15,11 @@ dbImportXLSX(con, xlsx, ignore_genotype = TRUE, ignore_trait = TRUE, ...)
 
 \item{ignore_trait}{Ignore trait table when importing}
 
-\item{...}{Other arguments}
+\item{...}{Other arguments. Supported arguments include
+\itemize{
+   \item{extra_design: Extra columns in the experiment design.}
+   \item{tz: The time zone for the hourly climates.}
+}}
 }
 \description{
 Import data from excel file
