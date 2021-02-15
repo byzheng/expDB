@@ -77,7 +77,7 @@ dbImportXLSX <- function(con, xlsx, ignore_genotype = TRUE,
                             mets$name[i])
                     } else if (mets$type[i] == "hourly") {
                         
-                        records <- read.csv(file_paths[i], as.is = TRUE)
+                        records <- utils::read.csv(file_paths[i], as.is = TRUE)
                         dbAddWeather(con, records[, c("timestamp", "temperature")],
                                      mets$name[i])
                     }
