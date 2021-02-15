@@ -51,9 +51,9 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pak::pkg_install("byzheng/weaana")
           pak::local_install_dev_deps(upgrade = TRUE)
           pak::pkg_install("pkgdown")
+          pak::pkg_install("byzheng/weaana")
         shell: Rscript {0}
 
       - name: Install package
