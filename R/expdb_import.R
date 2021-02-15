@@ -64,15 +64,23 @@ dbImportXLSX <- function(con, xlsx, ignore_genotype = TRUE,
                 file_paths <- file.path(dirname(xlsx), gsub('\\\\', '/', mets$filename))
                 if (sum(!file.exists(file_paths)) > 0)
                 {
-                    cat('Met files don\'t exist')
+                    cat('Met files don\'t exist:')
+                    cat("\r\n")
                     cat(paste( mets$filename[!file.exists(file_paths)], collapse = '\r\n'))
                     stop('Check met files')
                 }
                 for (i in seq(along = mets[[1]]))
                 {
-                    records <- weaana::readWeatherRecords(file_paths[i])
-                    dbAddWeather(con, records,
-                        mets$name[i])
+                    if (mets$type[i] == "daily") {
+                        records <- weaana::readWeatherRecords(file_paths[i])
+                        dbAddWeather(con, records,
+                            mets$name[i])
+                    } else if (mets$type[i] == "hourly") {
+                        
+                        records <- read.csv(file_paths[i], as.is = TRUE)
+                        dbAddWeather(con, records[, c("timestamp", "temperature")],
+                                     mets$name[i])
+                    }
                 }
             }
         }

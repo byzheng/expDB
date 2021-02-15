@@ -73,8 +73,8 @@ dbAddMets <- function(con, data)
                 paste(filename, idx, '.db', sep = ''))
               
               db <- DBI::dbConnect(RSQLite::SQLite(), dbname = ":memory:")
-              
-              sql <- '
+              if (type[i] == "daily") {
+                 sql <- '
     CREATE TABLE [expdb_met_daily] (
       [met_id] INTEGER NOT NULL ON CONFLICT IGNORE, 
       [year] INTEGER NOT NULL ON CONFLICT IGNORE, 
@@ -87,6 +87,15 @@ dbAddMets <- function(con, data)
       [vp] FLOAT, 
       CONSTRAINT [] PRIMARY KEY ([met_id], [year], [day]) ON CONFLICT IGNORE);            
                 '
+              } else {
+                  sql <- '
+  CREATE TABLE [expdb_met_hourly](
+  [met_id] INTEGER NOT NULL ON CONFLICT IGNORE, 
+  [timestamp] TIMESTAMP NOT NULL ON CONFLICT IGNORE, 
+  [temperature] FLOAT, 
+  PRIMARY KEY([met_id], [timestamp]) ON CONFLICT IGNORE);
+                '
+              }
               sql <- gsub('\t+', '', sql)
               sql <- sql[nchar(sql) > 0]
               DBI::dbBegin(db)
@@ -114,7 +123,7 @@ dbAddMets <- function(con, data)
                                 unique_col = 'name')
             sql  <- sprintf('UPDATE expdb_met_file SET NUM=%s WHERE id=%s',
                             c_num + 1, file_id)
-            DBI::dbGetQuery(con, sql)
+            DBI::dbExecute(con, sql)
         }
     } else {
       warning('not implemented')
@@ -154,13 +163,12 @@ dbAddWeather <- function(con, data, name=NULL)
     records <- weaana::getWeatherRecords(data)
   } else if (class(data) == 'data.frame')
   {
-    stop('NOT implemented')
     met_id <- getIdByUniqueIndex(con, 'expdb_met', name)
     if (sum(is.na(met_id)) > 0)
     {
       stop(sprintf('Met %s is not in the database', name))
     }
-    
+    records <- data
   } else
   {
     stop('NOT implemented')
@@ -183,9 +191,8 @@ dbAddWeather <- function(con, data, name=NULL)
       records <- records[,dbcols]
       DBI::dbAppendTable(con, 'expdb_met_daily', 
                          as.data.frame(records))
-    } else
-    {
-      stop('NOT implemented')
+    } else {
+        warning("Not implemented")
     }
     
   } else if (class(con) == 'SQLiteConnection') {
@@ -195,18 +202,18 @@ dbAddWeather <- function(con, data, name=NULL)
     FROM expdb_met M LEFT OUTER JOIN expdb_met_file F ON 
     M.[file_id]=F.[id] WHERE M.id = %s', met_id)
     met_meta <- DBI::dbGetQuery(con, sql)
-    if (met_meta$type == 1)
-    {
-      records$met_id <- met_id
-      filename <- file.path(
+    records$met_id <- met_id
+    filename <- file.path(
         dirname(dbGetDBName(con)),
         met_meta$filename)
-      if (!file.exists(filename))
-      {
+    if (!file.exists(filename))
+    {
         stop(sprintf('%s does not existed', filename))
-      }
-      m <- DBI::dbDriver("SQLite")
-      conf <- DBI::dbConnect(m, dbname = filename)
+    }
+    m <- DBI::dbDriver("SQLite")
+    conf <- DBI::dbConnect(m, dbname = filename)
+    if (met_meta$type == 1)
+    {
       dbcols <- DBI::dbListFields(conf, 'expdb_met_daily')
       missing_cols <- dbcols[!(dbcols %in% names(records))]
       for (k in seq(along = missing_cols))
@@ -217,9 +224,30 @@ dbAddWeather <- function(con, data, name=NULL)
       DBI::dbAppendTable(conf, 'expdb_met_daily', 
                          as.data.frame(records))
       DBI::dbDisconnect(conf)
-    } else
+    } else if (met_meta$type == 2)
     {
-      stop('NOT implemented')
+        # Assume the hourly records are csv format and have columns (timestamp, temperature)
+        names(records) <- tolower(names(records))
+        if (!tibble::has_name(records, "timestamp")) {
+            stop("missing the timestamp column in hourly climate")
+        } 
+        if (!tibble::has_name(records, "temperature")) {
+            warning("missing the temperature column in hourly climate")
+        } 
+        records$timestamp <- as.POSIXct(records$timestamp)
+        if (sum(is.na(records$timestamp)) > 0 ) {
+            stop("Missing values in the timestamp column")
+        }
+        dbcols <- DBI::dbListFields(conf, 'expdb_met_hourly')
+        missing_cols <- dbcols[!(dbcols %in% names(records))]
+        for (k in seq(along = missing_cols))
+        {
+            records[[missing_cols[k]]] <- NA
+        }
+        records <- records[,dbcols]
+        DBI::dbAppendTable(conf, 'expdb_met_hourly', 
+                           as.data.frame(records))
+        DBI::dbDisconnect(conf)
     }
   } else {
     warning('not implemented')

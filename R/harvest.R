@@ -194,7 +194,7 @@ defaultMeasurement <- function(con, phenotype, traits) {
         }
         phenotype <- phenotype %>%
             dplyr::select(!dplyr::all_of('traits')) %>%
-            tidyr::gather('traits', 'value', idx)
+            tidyr::gather('traits', 'value', dplyr::all_of(idx))
     }
     
     
