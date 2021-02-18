@@ -99,9 +99,9 @@ dbAddMets <- function(con, data)
               sql <- gsub('\t+', '', sql)
               sql <- sql[nchar(sql) > 0]
               DBI::dbBegin(db)
-              for (i in seq(along = sql))
+              for (j in seq(along = sql))
               {
-                res <- DBI::dbSendQuery(db, sql[i])
+                res <- DBI::dbSendQuery(db, sql[j])
                 DBI::dbClearResult(res)
               }
               success <- DBI::dbCommit(db)
@@ -119,7 +119,7 @@ dbAddMets <- function(con, data)
               c_num <- 0        
             }
             data$file_id <- file_id
-            dbInsertUpdateByRow(con, 'expdb_met', data, 
+            dbInsertUpdateByRow(con, 'expdb_met', data[i,], 
                                 unique_col = 'name')
             sql  <- sprintf('UPDATE expdb_met_file SET NUM=%s WHERE id=%s',
                             c_num + 1, file_id)
