@@ -4,7 +4,7 @@
 \alias{dbGetWeather}
 \title{Get weather records from expDB}
 \usage{
-dbGetWeather(con, name, format = "data_frame", na = NA_character_)
+dbGetWeather(con, name, format = "data_frame", na = NA_character_, tz = "UTC")
 }
 \arguments{
 \item{con}{a connection object as produced by dbConnect}
@@ -14,6 +14,8 @@ dbGetWeather(con, name, format = "data_frame", na = NA_character_)
 \item{format}{The format of export dataset.}
 
 \item{na}{The character for missing value with default NA}
+
+\item{tz}{Time zone applied for hourly temperature}
 }
 \description{
 Get weather records from expDB
