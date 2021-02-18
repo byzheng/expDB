@@ -262,8 +262,9 @@ dbAddWeather <- function(con, data, name=NULL)
 #' @param name The met name
 #' @param format The format of export dataset.
 #' @param na The character for missing value with default NA
+#' @param tz Time zone applied for hourly temperature
 #' @export
-dbGetWeather <- function(con, name, format = 'data_frame', na = NA_character_)
+dbGetWeather <- function(con, name, format = 'data_frame', na = NA_character_, tz = "UTC")
 {
   met_id <- getIdByUniqueIndex(con, 'expdb_met', name)
   if (sum(is.na(met_id)) > 0)
@@ -321,6 +322,7 @@ dbGetWeather <- function(con, name, format = 'data_frame', na = NA_character_)
       res$timestamp <- as.POSIXct(res$timestamp, 
                                   origin = as.POSIXct("1970-01-01 00:00.00", tz = "UTC"),
                                   tz = "UTC")
+      res$timestamp <- lubridate::with_tz(res$timestamp, tz)
       res$name <- met_infor$name
       res$number <- met_infor$number
       res$latitude <- met_infor$latitude
