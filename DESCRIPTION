@@ -34,5 +34,7 @@ Imports: DBI,
          rlang
 RoxygenNote: 7.1.1
 VignetteBuilder: knitr
-Suggests: knitr, rmarkdown
-
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat
