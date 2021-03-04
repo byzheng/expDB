@@ -83,12 +83,34 @@ dbImportXLSX <- function(con, xlsx, ignore_genotype = TRUE,
                         
                         records <- utils::read.csv(file_paths[i], as.is = TRUE)
                         if (!tibble::has_name(records, "timestamp")) {
-                            stop("missing the timestamp column in hourly climate")
-                        } 
-                        if (is.null(other_args$tz)) {
-                            stop("Argument tz should be used to hourly temperature")
+                            stop("missing the timestamp column in hourly climate.")
                         }
-                        records$timestamp <- as.POSIXct(records$timestamp, tz = other_args$tz)
+                        if (!tibble::has_name(records, "temperature")) {
+                            stop("missing the temperature column in hourly climate.")
+                        }
+                        if (is.null(other_args$tz)) {
+                            stop("Argument tz should be used to hourly temperature.")
+                        }
+                        
+                        if (!tibble::has_name(mets, "timestampformat")) {
+                           stop('The column "TimestampFormat" has to be specified for hourly weather data.') 
+                        }
+                        records$timestamp <- as.POSIXct(records$timestamp, tz = other_args$tz, format = mets$timestampformat[i])
+                        if (sum(is.na(records$timestamp)) > 0 ) {
+                            stop("Missing values in the timestamp column")
+                        }
+                        if (sum(is.na(records$temperature)) > 0 ) {
+                            stop("Missing values in the timestamp column")
+                        }
+                        
+                        message("The timestamp column in the weather file (", 
+                                file_paths[i], 
+                                ") is converted to POSIXct with format (", 
+                                mets$timestampformat[i],
+                                ") and timezone (", 
+                                other_args$tz,
+                                ").")
+                        message("The first value is ", records$timestamp[1], ".")
                         
                         dbAddWeather(con, records[, c("timestamp", "temperature")],
                                      mets$name[i])

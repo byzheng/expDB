@@ -93,10 +93,12 @@ xlsxToR <- function(file)
             e <- as.character(e)
             if (!grepl('Skipped over all data', e))
             {
-                stop(paste0('Error: ', sheets[i], ': ', e))
+                stop(paste0('Error in sheet "', sheets[i], '": ', e))
             }
         }, warning = function(w){
-            warning(paste0('Warning: ', sheets[i], ': ', w))
+            warning(paste0('Warning in sheet "', sheets[i], '": ', w))
+        }, message = function(m) {
+            warning(paste0('Message in sheet "', sheets[i], '": ', m))
         })
     }
     worksheets
