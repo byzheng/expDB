@@ -9,8 +9,8 @@ Description: R interface for expDB which is used to store
     experiment-based data.
 License: file LICENSE
 URL: https://expdb.bangyou.me/,
-    https://github.com/byzheng/expDB
-BugReports: https://github.com/byzheng/expDB/issues
+    https://github.com/byzheng/expdb
+BugReports: https://github.com/byzheng/expdb/issues
 Encoding: UTF-8
 LazyData: true
 Remotes: byzheng/weaana
