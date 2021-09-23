@@ -60,6 +60,7 @@ expdbConnect <- function(filename)
 #' con <- connect('filename')
 #' disconnect(con)
 #' }
+#' @return no return values
 #' @export
 expdbDisconnect <- function(con)
 {

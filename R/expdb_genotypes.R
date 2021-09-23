@@ -9,6 +9,7 @@
 #'
 #' @param con a connection object as produced by dbConnect
 #' @param genotypes A string vector of genotypes
+#' @return No return values
 #' @export
 dbAddGenotype <- function(con, genotypes)
 {   
@@ -76,6 +77,7 @@ dbAddGenotype <- function(con, genotypes)
 #'
 #' @param con a connection object as produced by dbConnect
 #' @param genes A data.frame of genes
+#' @return No return values
 #' @export
 dbAddGene <- function(con, genes)
 {
@@ -98,6 +100,7 @@ dbAddGene <- function(con, genes)
 #'
 #' @param con a connection object as produced by dbConnect
 #' @param genes A data.frame of genes
+#' @return No return values
 #' @export
 dbAddGeneAllele <- function(con, genes)
 {
@@ -115,6 +118,7 @@ dbAddGeneAllele <- function(con, genes)
 #'
 #' @param con a connection object as produced by dbConnect
 #' @param genotype The genotype name will be checked
+#' @return A vector with check genotype names
 #' @export
 dbGenotypeCheckName <- function(con, genotype)
 {
@@ -178,6 +182,8 @@ dbGenotypeCheckName <- function(con, genotype)
 #'
 #' @param con a connection object as produced by dbConnect
 #' @param name_only Only return the name of genotypes
+#' @return data.frame with genotype information or a vector with genotype name 
+#' if name_only = TRUE.
 #' @export
 dbGetGenotype <- function(con, name_only = FALSE)
 {
@@ -216,6 +222,7 @@ dbGetGenotype <- function(con, name_only = FALSE)
 
 #' Get the gene information
 #' @param con a connection object as produced by dbConnect
+#' @return a data.frame with all gene information
 #' @export
 dbGetGene <- function(con)
 {

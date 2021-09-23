@@ -11,6 +11,9 @@ dbAddGenotype(con, genotypes)
 
 \item{genotypes}{A string vector of genotypes}
 }
+\value{
+No return values
+}
 \description{
 Add genotypes into expDB
 }

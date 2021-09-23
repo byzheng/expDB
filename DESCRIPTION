@@ -2,12 +2,13 @@ Package: expDB
 Type: Package
 Title: Database for Experiment Dataset
 Version: 0.1.0
+Maintainer: Bangyou Zheng <bangyou.zheng@csiro.au>
 Authors@R: person("Bangyou", "Zheng", 
                email = "bangyou.zheng@csiro.au", 
                role = c("aut", "cre"))
-Description: R interface for expDB which is used to store
+Description: An R interface is used to store and process
     experiment-based data.
-License: file LICENSE
+License: MIT + file LICENSE
 URL: https://expdb.bangyou.me/,
     https://github.com/byzheng/expdb
 BugReports: https://github.com/byzheng/expdb/issues
@@ -24,7 +25,7 @@ Imports: DBI,
          lubridate,
          dplyr,
          methods,
-         weaana,
+         weaana (>= 0.1.1),
          tidyr,
          tidyverse,
          magrittr,
@@ -32,7 +33,7 @@ Imports: DBI,
          reshape2,
          stringr,
          rlang
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 VignetteBuilder: knitr
 Suggests: 
     knitr,

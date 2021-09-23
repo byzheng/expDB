@@ -9,6 +9,9 @@ dbGetGene(con)
 \arguments{
 \item{con}{a connection object as produced by dbConnect}
 }
+\value{
+a data.frame with all gene information
+}
 \description{
 Get the gene information
 }

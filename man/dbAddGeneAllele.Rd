@@ -11,6 +11,9 @@ dbAddGeneAllele(con, genes)
 
 \item{genes}{A data.frame of genes}
 }
+\value{
+No return values
+}
 \description{
 Add gene allele information into database
 }

@@ -9,6 +9,9 @@ expdbDisconnect(con)
 \arguments{
 \item{con}{a connection object as produced by dbConnect.}
 }
+\value{
+no return values
+}
 \description{
 Didconnect to expDB
 }

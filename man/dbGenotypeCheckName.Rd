@@ -11,6 +11,9 @@ dbGenotypeCheckName(con, genotype)
 
 \item{genotype}{The genotype name will be checked}
 }
+\value{
+A vector with check genotype names
+}
 \description{
 Check genotype names
 }

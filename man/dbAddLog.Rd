@@ -13,6 +13,9 @@ dbAddLog(con, msg, date = format(Sys.time(), format = "\%Y-\%m-\%d"))
 
 \item{date}{Create time of message}
 }
+\value{
+No return values
+}
 \description{
 Add log from expDB
 }

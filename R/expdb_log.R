@@ -10,6 +10,7 @@
 #' @param con a connection object as produced by dbConnect
 #' @param msg Add message into expdb
 #' @param date Create time of message
+#' @return No return values
 #' @export
 dbAddLog <- function(con, msg, 
     date = format(Sys.time(), format='%Y-%m-%d'))
@@ -24,6 +25,7 @@ dbAddLog <- function(con, msg,
 
 #' Get log from expDB
 #' @param con a connection object as produced by dbConnect
+#' @return A data.frame with all logs
 #' @export
 dbGetLog <- function(con)
 {

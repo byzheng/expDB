@@ -11,6 +11,10 @@ dbGetGenotype(con, name_only = FALSE)
 
 \item{name_only}{Only return the name of genotypes}
 }
+\value{
+data.frame with genotype information or a vector with genotype name 
+if name_only = TRUE.
+}
 \description{
 Get the genotype information
 }

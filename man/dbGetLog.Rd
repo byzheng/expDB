@@ -9,6 +9,9 @@ dbGetLog(con)
 \arguments{
 \item{con}{a connection object as produced by dbConnect}
 }
+\value{
+A data.frame with all logs
+}
 \description{
 Get log from expDB
 }

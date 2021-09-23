@@ -21,6 +21,9 @@ dbImportXLSX(con, xlsx, ignore_genotype = TRUE, ignore_trait = TRUE, ...)
    \item{tz: The time zone for the hourly climates.}
 }}
 }
+\value{
+No return values
+}
 \description{
 Import data from excel file
 }

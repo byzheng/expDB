@@ -15,6 +15,7 @@
 #'    \item{extra_design: Extra columns in the experiment design.}
 #'    \item{tz: The time zone for the hourly climates.}
 #' }
+#' @return No return values
 #' @export
 dbImportXLSX <- function(con, xlsx, ignore_genotype = TRUE,
                          ignore_trait = TRUE, ...)
