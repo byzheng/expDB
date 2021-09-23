@@ -13,6 +13,9 @@ dbGetOrganFinalLeafNumber(con, trials = NULL, ...)
 
 \item{...}{Arguments to specific trials.}
 }
+\value{
+A data.frame for selected final leaf number
+}
 \description{
 The final leaf number is first retrived from trait
 "O_FinalLeafNumber", then calculated from trait

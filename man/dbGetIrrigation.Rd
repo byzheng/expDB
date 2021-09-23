@@ -11,6 +11,9 @@ dbGetIrrigation(con, ...)
 
 \item{...}{Other arguments to specify meta data}
 }
+\value{
+a data frame for irrigation information
+}
 \description{
 Get irrigation from database
 }

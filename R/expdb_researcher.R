@@ -8,6 +8,7 @@
 #' Insert and update researcher into expDB
 #' @param con A connection object as produced by dbConnect
 #' @param data A data frame includes all columns
+#' @return no return values
 #' @export
 dbAddResearcher <- function(con, data)
 {

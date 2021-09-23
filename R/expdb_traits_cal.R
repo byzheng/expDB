@@ -4,9 +4,9 @@
 
 # Functions to get values of trait
 
-#' Get the unique columns for a treatment
-#' @param con a connection object as produced by dbConnect
-#' @param plot_id id for plot
+# Get the unique columns for a treatment
+# @param con a connection object as produced by dbConnect
+# @param plot_id id for plot
 dbGetTreatmentColumns <- function(con, plot_id) {
     sql <- paste0('SELECT name FROM expdb_trial_design_extra ',
                   'WHERE plot_id in (',
@@ -30,6 +30,7 @@ dbGetTreatmentColumns <- function(con, plot_id) {
 #' @param con a connection object as produced by dbConnect
 #' @param trials A data.frame to specify trials. If not NULL, other arguments
 #' @param ... Arguments to specific trials.
+#' @return A data.frame for selected final leaf number
 #' @export
 dbGetOrganFinalLeafNumber <- function(con, trials = NULL, ...) {
     
@@ -90,6 +91,7 @@ dbGetOrganFinalLeafNumber <- function(con, trials = NULL, ...) {
 #' @param trials A data.frame to specify trials. If not NULL, other arguments
 #' @param avg Whether to calculate the average value
 #' @param ... Arguments to specific trials.
+#' @return A data.frame for selected Haun Index
 #' @export
 dbGetOrganHaunIndex <- function(con, trials = NULL, avg = TRUE, ...) {
     
@@ -161,6 +163,7 @@ dbGetOrganHaunIndex <- function(con, trials = NULL, avg = TRUE, ...) {
 #' @param trials A data.frame to specify trials. If not NULL, other arguments
 #' will be ignored.
 #' @param ... Arguments pass to dbGetTrials
+#' @return A data.frame for selected field population
 #' @export
 dbGetFieldPopulation <- function(con, trials = NULL, ...) {
     if (is.null(trials)) {
@@ -228,6 +231,7 @@ dbGetFieldPopulation <- function(con, trials = NULL, ...) {
 #' @param trials A data.frame to specify trials. If not NULL, other arguments
 #' will be ignored.
 #' @param ... Arguments pass to dbGetTrials
+#' @return A data.frame for selected flowering time
 #' @export
 dbGetPlantFlowering <- function(con, trials = NULL, ...) {
     if (is.null(trials)) {
@@ -242,6 +246,7 @@ dbGetPlantFlowering <- function(con, trials = NULL, ...) {
 #' @param trials A data.frame to specify trials. If not NULL, other arguments
 #' will be ignored.
 #' @param ... Arguments pass to dbGetTrials
+#' @return A data.frame for selected heading time
 #' @export
 dbGetPlantHeading <- function(con, trials = NULL, ...) {
     if (is.null(trials)) {
@@ -258,6 +263,7 @@ dbGetPlantHeading <- function(con, trials = NULL, ...) {
 #' @param trials A data.frame to specify trials. If not NULL, other arguments
 #' will be ignored.
 #' @param ... Arguments pass to dbGetTrials
+#' @return A data.frame for selected stem elongation stage
 #' @export
 dbGetPlantStemElongation <- function(con, trials = NULL, ...) {
     if (is.null(trials)) {
@@ -272,6 +278,7 @@ dbGetPlantStemElongation <- function(con, trials = NULL, ...) {
 #' @param trials A data.frame to specify trials. If not NULL, other arguments
 #' will be ignored.
 #' @param ... Arguments pass to dbGetTrials
+#' @return A data.frame for selected maturity time
 #' @export
 dbGetFieldMaturity <- function(con, trials = NULL, ...) {
     if (is.null(trials)) {
@@ -317,6 +324,7 @@ dbGetFieldMaturity <- function(con, trials = NULL, ...) {
 #' @param trials A data.frame to specify trials. If not NULL, other arguments
 #' will be ignored.
 #' @param key_stage The key zadoks stage
+#' @return A data.frame for selected Zadoks stage
 #' @export
 dbGetZadoksStage <- function(con, trials, key_stage) {
     # Average the zadoks score

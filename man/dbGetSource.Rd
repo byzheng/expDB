@@ -9,6 +9,9 @@ dbGetSource(con)
 \arguments{
 \item{con}{a connection object as produced by dbConnect}
 }
+\value{
+A data.frame for all source in the data base
+}
 \description{
 Get source from expDB
 }

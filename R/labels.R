@@ -13,6 +13,7 @@
 #' @param measure_traits trait list
 #' @param sample_num Number of sample in each plot
 #' @param measure_traits_map a trait map
+#' @return A data.frame for generated barcodes
 #' @export
 createBarcode <- function(
     designs,
@@ -63,9 +64,10 @@ createBarcode <- function(
 
 #' Generate labels for avery products
 #'
-#' @param labels A character vector will be used to genearte labels
+#' @param labels A character vector will be used to generate labels
 #' @param file the file name to export
 #' @param product The product ID of Avery
+#' @return No return values. Generated PDF file for all labels.
 #' @export
 averyLabel <- function(
     labels, file,

@@ -11,6 +11,9 @@ dbAddNodes(con, data)
 
 \item{data}{phenotype value}
 }
+\value{
+no return values
+}
 \description{
 Add nodes into expDB
 }

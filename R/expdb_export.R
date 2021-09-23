@@ -12,7 +12,7 @@
 #' @param ... All other arguments to define range of export trials.
 #' All trials will be export if there are not arguments.
 #' Supported arguments include trial (or trialcode)
-#' @values Write weather records into files. No return values.
+#' @return Write weather records into files. No return values.
 #' @export
 dbExportMet <- function(con, output, na = NA, ...)
 {

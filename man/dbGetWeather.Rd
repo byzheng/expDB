@@ -17,6 +17,9 @@ dbGetWeather(con, name, format = "data_frame", na = NA_character_, tz = "UTC")
 
 \item{tz}{Time zone applied for hourly temperature}
 }
+\value{
+a data.frame for all weather records
+}
 \description{
 Get weather records from expDB
 }

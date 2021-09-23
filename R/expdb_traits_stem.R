@@ -9,6 +9,7 @@
 #' @param trials A data.frame to specify trials. If not NULL, other arguments
 #' will be ignored.
 #' @param ... Arguments pass to dbGetTrials
+#' @return A data.frame for selected stem number
 #' @export
 dbGetFieldStemNumber <- function(con, trials = NULL, ...) {
     if (is.null(trials)) {
@@ -27,6 +28,7 @@ dbGetFieldStemNumber <- function(con, trials = NULL, ...) {
 #' @param trials A data.frame to specify trials. If not NULL, other arguments
 #' will be ignored.
 #' @param ... Arguments pass to dbGetTrials
+#' @return A data.frame for selected tiller number
 #' @export
 dbGetFieldTillerNumber <- function(con, trials = NULL, ...) {
     if (is.null(trials)) {
@@ -45,6 +47,7 @@ dbGetFieldTillerNumber <- function(con, trials = NULL, ...) {
 #' @param trials A data.frame to specify trials. If not NULL, other arguments
 #' will be ignored.
 #' @param ... Arguments pass to dbGetTrials
+#' @return A data.frame for selected stem number for individual plant
 #' @export
 dbGetPlantStemNumber <- function(con, trials = NULL, ...) {
     if (is.null(trials)) {
@@ -64,6 +67,7 @@ dbGetPlantStemNumber <- function(con, trials = NULL, ...) {
 #' @param trials A data.frame to specify trials. If not NULL, other arguments
 #' will be ignored.
 #' @param ... Arguments pass to dbGetTrials
+#' @return A data.frame for selected tiller number for individual plant
 #' @export
 dbGetPlantTillerNumber <- function(con, trials = NULL, ...) {
     if (is.null(trials)) {
@@ -77,11 +81,11 @@ dbGetPlantTillerNumber <- function(con, trials = NULL, ...) {
     )
 }
 
-#' Estimation of stem/tiller number per unit area or plant
-#'
-#' @param con a connection object as produced by dbConnect
-#' @param trials A data.frame to specify trials
-#' @param traits_order A list of traits for stem and tiller numbers.
+# Estimation of stem/tiller number per unit area or plant
+#
+# @param con a connection object as produced by dbConnect
+# @param trials A data.frame to specify trials
+# @param traits_order A list of traits for stem and tiller numbers.
 dbGetStemTillerNumber <- function(
     con, trials,
     traits_order) {
@@ -140,6 +144,8 @@ dbGetStemTillerNumber <- function(
 #' @param trials A data.frame to specify trials. If not NULL, other arguments
 #' will be ignored.
 #' @param ... Arguments pass to dbGetTrials
+#' 
+#' @return A data.frame for selected dry weight per stem
 #' @export
 dbGetDryWeightPerStem <- function(con, trials = NULL, ...) {
     if (is.null(trials)) {

@@ -8,6 +8,7 @@
 #' Process quadrat (detail) harvestQuadratDetail
 #' @param con a connection object as produced by dbConnect
 #' @param records Phenotype records
+#' @return no return values
 #' @export
 harvestQuadratDetail <- function(con, records)
 {
@@ -157,11 +158,12 @@ harvestQuadratDetail <- function(con, records)
     invisible(dbAddPhenotype(con, phe))
 }
     
-#' Import a normal measurement
-#' 
-#' @param con a connection object as produced by dbConnect
-#' @param phenotype Phenotype records
-#' @param traits traits
+# Import a normal measurement
+# 
+# @param con a connection object as produced by dbConnect
+# @param phenotype Phenotype records
+# @param traits traits
+# @return no return values
 defaultMeasurement <- function(con, phenotype, traits) {
     col_names <- tolower(names(phenotype))
     pos_col <- !(col_names %in% c('notes', 'comment', 'comments'))
@@ -222,10 +224,10 @@ defaultMeasurement <- function(con, phenotype, traits) {
     dbAddPhenotype(con, phenotype)
 }
 
-#' Import the measurement of leaf size
-#' 
-#' @param con a connection object as produced by dbConnect
-#' @param phenotype Phenotype records
+# Import the measurement of leaf size
+# 
+# @param con a connection object as produced by dbConnect
+# @param phenotype Phenotype records
 measurementLeafSize <- function(con, phenotype) {
     phenotype_alias <- list(trial = c('trialcode'),
                             row = c('plot'), column = c('range'))

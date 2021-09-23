@@ -15,6 +15,9 @@ a WeaAna object, or a data frame.}
 \item{name}{The met name in the database 
 if data is a data frame.}
 }
+\value{
+no return values
+}
 \description{
 Add weather records into expDB
 }

@@ -17,6 +17,9 @@ dbAddTrialSoil(
 
 \item{units}{a list for the unit}
 }
+\value{
+no return values
+}
 \description{
 Add soil for a trial
 }

@@ -13,6 +13,9 @@ dbAddDesigns(con, data, extra_design = NULL)
 
 \item{extra_design}{The extra columns for design}
 }
+\value{
+no return values
+}
 \description{
 Add design for a trial
 }

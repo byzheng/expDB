@@ -8,6 +8,7 @@
 #' Insert or update site into expDB
 #' @param con a connection object as produced by dbConnect
 #' @param data A data frame includes all columns
+#' @return no return values
 #' @export
 dbAddSites <- function(con, data)
 {
@@ -29,6 +30,7 @@ dbAddSites <- function(con, data)
 
 #' Get site into expDB
 #' @param con a connection object as produced by dbConnect
+#' @return a data.frame for all sites in the data base
 #' @export
 dbGetSites <- function(con)
 {

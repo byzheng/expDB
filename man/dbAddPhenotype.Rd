@@ -11,6 +11,9 @@ dbAddPhenotype(con, data)
 
 \item{data}{phenotype value}
 }
+\value{
+no return values
+}
 \description{
 Add design for a trial
 }

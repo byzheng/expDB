@@ -8,6 +8,7 @@
 #' Insert or Update trial into expDB
 #' @param con a connection object as produced by dbConnect
 #' @param data A data frame includes all columns
+#' @return no return values
 #' @export
 dbAddTrials <- function(con, data)
 {
@@ -73,6 +74,7 @@ dbAddTrials <- function(con, data)
 #' @param con a connection object as produced by dbConnect
 #' @param data Trial design
 #' @param extra_design The extra columns for design
+#' @return no return values
 #' @export
 dbAddDesigns <- function(con, data, extra_design = NULL)
 {
@@ -146,6 +148,7 @@ dbAddDesigns <- function(con, data, extra_design = NULL)
 #' @param con a connection object as produced by dbConnect
 #' @param data Soil profiles for trials
 #' @param units a list for the unit
+#' @return no return values
 #' @export
 dbAddTrialSoil <- function(con, data, units = list(thickness = 'cm',
     no3 = 'kg/ha', nh4 = 'kg/ha'))
@@ -216,6 +219,7 @@ dbAddTrialSoil <- function(con, data, units = list(thickness = 'cm',
 #' All trials will be export if there are not arguments.
 #' Supported arguments include trial (or trialcode)
 #' @param design Whether include design
+#' @return A data.frame for selected trials
 #' @export
 dbGetTrials <- function(con, design = TRUE, ...)
 {
@@ -328,6 +332,7 @@ dbGetTrials <- function(con, design = TRUE, ...)
 
 #' List all trials
 #' @param con a connection object as produced by dbConnect
+#' @return A data.frame for all trials in the data base
 #' @export
 dbListTrials <- function(con)
 {

@@ -14,6 +14,9 @@ will be ignored.}
 
 \item{key_stage}{The key zadoks stage}
 }
+\value{
+A data.frame for selected Zadoks stage
+}
 \description{
 Obtain the key phenology stage
 }

@@ -8,6 +8,7 @@
 #' Add design for a trial
 #' @param con a connection object as produced by dbConnect
 #' @param data phenotype value
+#' @return no return values
 #' @export
 dbAddPhenotype <- function(con, data)
 {
@@ -98,7 +99,8 @@ dbAddPhenotype <- function(con, data)
 #' @param direction One of 'long' or 'wide' for reshape function
 #' @param tt Whether to calculate thermal time
 #' @param gene Whether to get gene information
-#' @param ... All other arguments to define range of export trials.
+#' @param ... All other arguments to define range of export trials
+#' @return a data.frame for selected phenotypic values
 #' @export
 dbGetPhenotype <- function(con, traits = NULL, direction = 'long',
                            tt = FALSE, gene = FALSE, ...) {
@@ -112,13 +114,13 @@ dbGetPhenotype <- function(con, traits = NULL, direction = 'long',
     phe
 }
 
-#' Get phenotype values through a group of conditions
-#' @param con a connection object as produced by dbConnect
-#' @param trials Trials for filter
-#' @param traits A list of traits. All traits will be returned if NULL
-#' @param direction One of 'long' or 'wide' for reshape function
-#' @param tt Whether to calculate thermal time
-#' @param gene Whether to get gene information
+# Get phenotype values through a group of conditions
+# @param con a connection object as produced by dbConnect
+# @param trials Trials for filter
+# @param traits A list of traits. All traits will be returned if NULL
+# @param direction One of 'long' or 'wide' for reshape function
+# @param tt Whether to calculate thermal time
+# @param gene Whether to get gene information
 dbGetPhenotype_ <- function(con, trials, traits = NULL, direction = 'long',
                             tt = FALSE, gene = FALSE)
 {

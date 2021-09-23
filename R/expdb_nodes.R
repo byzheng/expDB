@@ -8,6 +8,7 @@
 #' 
 #' @param con a connection object as produced by dbConnect
 #' @param data phenotype value
+#' @return no return values
 #' @export
 dbAddNodes <- function(con, data) {
     names(data) <- tolower(names(data))

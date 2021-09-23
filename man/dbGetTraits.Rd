@@ -9,6 +9,9 @@ dbGetTraits(con)
 \arguments{
 \item{con}{a connection object as produced by dbConnect}
 }
+\value{
+a data.frame for all traits in the data base
+}
 \description{
 Get trait list
 }

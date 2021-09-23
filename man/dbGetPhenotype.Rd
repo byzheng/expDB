@@ -24,7 +24,10 @@ dbGetPhenotype(
 
 \item{gene}{Whether to get gene information}
 
-\item{...}{All other arguments to define range of export trials.}
+\item{...}{All other arguments to define range of export trials}
+}
+\value{
+a data.frame for selected phenotypic values
 }
 \description{
 Get phenotype values through a group of conditions

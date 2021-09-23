@@ -7,11 +7,14 @@
 averyLabel(labels, file, product = "L7163")
 }
 \arguments{
-\item{labels}{A character vector will be used to genearte labels}
+\item{labels}{A character vector will be used to generate labels}
 
 \item{file}{the file name to export}
 
 \item{product}{The product ID of Avery}
+}
+\value{
+No return values. Generated PDF file for all labels.
 }
 \description{
 Generate labels for avery products

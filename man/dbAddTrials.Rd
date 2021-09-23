@@ -11,6 +11,9 @@ dbAddTrials(con, data)
 
 \item{data}{A data frame includes all columns}
 }
+\value{
+no return values
+}
 \description{
 Insert or Update trial into expDB
 }

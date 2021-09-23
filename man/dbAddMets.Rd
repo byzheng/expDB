@@ -11,6 +11,9 @@ dbAddMets(con, data)
 
 \item{data}{Met design}
 }
+\value{
+no return values
+}
 \description{
 Insert and update met into expDB
 }

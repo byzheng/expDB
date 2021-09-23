@@ -15,6 +15,9 @@ dbGetOrganHaunIndex(con, trials = NULL, avg = TRUE, ...)
 
 \item{...}{Arguments to specific trials.}
 }
+\value{
+A data.frame for selected Haun Index
+}
 \description{
 The Haun Index is retrived from trait "O_HaunIndex", extending the final observationa
 }

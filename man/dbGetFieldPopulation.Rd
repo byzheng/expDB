@@ -14,6 +14,9 @@ will be ignored.}
 
 \item{...}{Arguments pass to dbGetTrials}
 }
+\value{
+A data.frame for selected field population
+}
 \description{
 Estimation of plant populations
 }

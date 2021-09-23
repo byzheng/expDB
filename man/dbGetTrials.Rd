@@ -15,6 +15,9 @@ dbGetTrials(con, design = TRUE, ...)
 All trials will be export if there are not arguments.
 Supported arguments include trial (or trialcode)}
 }
+\value{
+A data.frame for selected trials
+}
 \description{
 Get trials by a groups of conditions.
 }

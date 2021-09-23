@@ -8,6 +8,7 @@
 #' Insert or Update methods into expDB
 #' @param con a connection object as produced by dbConnect
 #' @param data A data frame includes all columns
+#' @return no return values
 #' @export
 dbAddMethods <- function(con, data)
 {
@@ -18,6 +19,7 @@ dbAddMethods <- function(con, data)
 #' Insert or Update irrigation into expDB
 #' @param con a connection object as produced by dbConnect
 #' @param data A data frame includes all columns
+#' @return no return values
 #' @export
 dbAddIrrigatons <- function(con, data)
 {
@@ -47,6 +49,7 @@ dbAddIrrigatons <- function(con, data)
 #' 
 #' @param con a connection object as produced by dbConnect
 #' @param data A data frame includes all columns
+#' @return no return values
 #' @export
 dbAddFertilization <- function(con, data)
 {
@@ -77,6 +80,7 @@ dbAddFertilization <- function(con, data)
 #' 
 #' @param con a connection object as produced by dbConnect
 #' @param ... Other arguments to specify meta data
+#' @return a data frame for irrigation information
 #' @export
 dbGetIrrigation <- function(con, ...) {
     trials <- dbGetTrials(con, ...)
@@ -92,6 +96,7 @@ dbGetIrrigation <- function(con, ...) {
 #' 
 #' @param con a connection object as produced by dbConnect
 #' @param ... Other arguments to specify meta data
+#' @return a data.frame for fertilization information
 #' @export
 dbGetFertilization <- function(con, ...) {
     trials <- dbGetTrials(con, ...)

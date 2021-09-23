@@ -11,6 +11,9 @@ dbAddSites(con, data)
 
 \item{data}{A data frame includes all columns}
 }
+\value{
+no return values
+}
 \description{
 Insert or update site into expDB
 }

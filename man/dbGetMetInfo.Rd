@@ -11,6 +11,9 @@ dbGetMetInfo(con, name)
 
 \item{name}{The met name}
 }
+\value{
+a data.frame for met information
+}
 \description{
 Get met information
 }

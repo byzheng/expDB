@@ -14,6 +14,9 @@ will be ignored.}
 
 \item{...}{Arguments pass to dbGetTrials}
 }
+\value{
+A data.frame for selected tiller number for individual plant
+}
 \description{
 Estimation of tiller number per plant
 }

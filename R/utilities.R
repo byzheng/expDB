@@ -4,17 +4,18 @@
 # *
 
 # utilities
-#' Convert year and day of year to date
-#'
-#' @param day day of year
-#' @param year year
+# Convert year and day of year to date
+#
+# @param day day of year
+# @param year year
 yearDay2Date <- function(day, year)
 {
     return (as.Date(day, origin = as.Date(paste(year - 1, '-12-31', sep = ''),
         format = '%Y-%m-%d')))
 }
-#' Generate unique name with digest method
-#' @param data A data frame
+
+# Generate unique name with digest method
+# @param data A data frame
 generateName <- function(data)
 {
     for (i in seq(length = ncol(data)))
@@ -34,10 +35,10 @@ generateName <- function(data)
 }
 
 
-#' Get index id by name.
-#' @param name The old columns
-#' @param alias The alias name for all columns
-#' @return The new name get rid of alias
+# Get index id by name.
+# @param name The old columns
+# @param alias The alias name for all columns
+# @return The new name get rid of alias
 checkAlias <- function(name, alias = getAlias())
 {
     if (is.null(name))
@@ -55,7 +56,7 @@ checkAlias <- function(name, alias = getAlias())
 }
 
 
-#' Alias of column names
+# Alias of column names
 getAlias <- function()
 {
     alias <- list(trial = c('trialcode'),
@@ -64,18 +65,18 @@ getAlias <- function()
     return(alias)
 }
 
-#' Paste a vector to format used for SQL in
-#' @param x a vector
+# Paste a vector to format used for SQL in
+# @param x a vector
 sqlIn <- function(x)
 {
     return(paste('in (', paste(paste('"', x, '"', sep = ''),
                     collapse = ', '), ')', sep = ''))
 }
 
-#' Read xlsx files
-#'
-#' @param file The path to xlsx file
-#' @export
+# Read xlsx files
+#
+# @param file The path to xlsx file
+# @export
 xlsxToR <- function(file)
 {
     sheets <- readxl::excel_sheets(file)
@@ -104,33 +105,10 @@ xlsxToR <- function(file)
     worksheets
 }
 
-#' #' Write tables into xlsx files
-#' #'
-#' #' @param file The xlsx file
-#' #' @param ... Pairs of table and values
-#' #' @export
-#' write2Xlsx <- function(file, ...) {
-#'     tbls <- list(...)
-#'     sheet_name <- names(tbls)
-#'     newWB <- XLConnect::loadWorkbook(filename = file, create = TRUE)
-#'     for(i in seq(along = tbls)){
-#'         XLConnect::createSheet(newWB, name = sheet_name[i])
-#'         writeWorksheet(
-#'             newWB,
-#'             data = as.data.frame(tbls[[i]]),
-#'             sheet = sheet_name[i],
-#'             header = TRUE,
-#'             rownames = NULL)
-#'     }
-#'     saveWorkbook(newWB)
-#' }
-
-
-
-#' System based file path
-#'
-#' @param file The filename
-#' @param package Package name
+# System based file path
+#
+# @param file The filename
+# @param package Package name
 system_file <- function(file, package) {
     # if (Sys.info()['sysname'] == 'Linux') {
     #     file <- paste0(file, '.gz')

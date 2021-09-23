@@ -17,6 +17,9 @@ dbExportMet(con, output, na = NA, ...)
 All trials will be export if there are not arguments.
 Supported arguments include trial (or trialcode)}
 }
+\value{
+Write weather records into files. No return values.
+}
 \description{
 Export trials weather records to met file
 }

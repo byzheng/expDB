@@ -10,6 +10,7 @@
 #' Insert and update source into expDB
 #' @param con A connection object as produced by dbConnect
 #' @param data A data frame includes all columns
+#' @return no return values
 #' @export
 dbAddSource <- function(con, data)
 {
@@ -20,6 +21,7 @@ dbAddSource <- function(con, data)
 
 #' Get source from expDB
 #' @param con a connection object as produced by dbConnect
+#' @return A data.frame for all source in the data base
 #' @export
 dbGetSource <- function(con)
 {

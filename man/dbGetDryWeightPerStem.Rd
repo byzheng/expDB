@@ -14,6 +14,9 @@ will be ignored.}
 
 \item{...}{Arguments pass to dbGetTrials}
 }
+\value{
+A data.frame for selected dry weight per stem
+}
 \description{
 Get the dry weight per stem
 }

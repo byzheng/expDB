@@ -11,6 +11,9 @@ harvestQuadratDetail(con, records)
 
 \item{records}{Phenotype records}
 }
+\value{
+no return values
+}
 \description{
 Process quadrat (detail) harvestQuadratDetail
 }

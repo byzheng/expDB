@@ -26,6 +26,9 @@ createBarcode(
 
 \item{measure_traits_map}{a trait map}
 }
+\value{
+A data.frame for generated barcodes
+}
 \description{
 Create labels with barcode
 }

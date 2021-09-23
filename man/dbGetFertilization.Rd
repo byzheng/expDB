@@ -11,6 +11,9 @@ dbGetFertilization(con, ...)
 
 \item{...}{Other arguments to specify meta data}
 }
+\value{
+a data.frame for fertilization information
+}
 \description{
 Get fertilization from database
 }

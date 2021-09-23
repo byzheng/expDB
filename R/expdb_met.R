@@ -4,8 +4,8 @@
 # *
 
 # expDB API for met
-#' Get the database file name
-#' @param con a connection object as produced by dbConnect
+# Get the database file name
+# @param con a connection object as produced by dbConnect
 dbGetDBName <- function(con)
 {
   methods::slot(con, 'dbname')
@@ -15,6 +15,7 @@ dbGetDBName <- function(con)
 #' Insert and update met into expDB
 #' @param con a connection object as produced by dbConnect
 #' @param data Met design
+#' @return no return values
 #' @export
 dbAddMets <- function(con, data)
 {
@@ -136,6 +137,7 @@ dbAddMets <- function(con, data)
 #' a WeaAna object, or a data frame.
 #' @param name The met name in the database 
 #' if data is a data frame.
+#' @return no return values
 #' @export
 dbAddWeather <- function(con, data, name=NULL)
 {
@@ -263,6 +265,7 @@ dbAddWeather <- function(con, data, name=NULL)
 #' @param format The format of export dataset.
 #' @param na The character for missing value with default NA
 #' @param tz Time zone applied for hourly temperature
+#' @return a data.frame for all weather records
 #' @export
 dbGetWeather <- function(con, name, format = 'data_frame', na = NA_character_, tz = "UTC")
 {
@@ -337,6 +340,7 @@ dbGetWeather <- function(con, name, format = 'data_frame', na = NA_character_, t
 #'
 #' @param con a connection object as produced by dbConnect
 #' @param name The met name
+#' @return a data.frame for met information
 #' @export
 dbGetMetInfo <- function(con, name)
 {

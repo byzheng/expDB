@@ -9,6 +9,9 @@ dbListTrials(con)
 \arguments{
 \item{con}{a connection object as produced by dbConnect}
 }
+\value{
+A data.frame for all trials in the data base
+}
 \description{
 List all trials
 }

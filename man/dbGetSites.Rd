@@ -9,6 +9,9 @@ dbGetSites(con)
 \arguments{
 \item{con}{a connection object as produced by dbConnect}
 }
+\value{
+a data.frame for all sites in the data base
+}
 \description{
 Get site into expDB
 }

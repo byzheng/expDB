@@ -9,6 +9,7 @@
 
 #' @param con a connection object as produced by dbConnect
 #' @param data A data frame includes all columns
+#' @return no return values
 #' @export
 dbAddTraits <- function(con, data)
 {
@@ -20,6 +21,7 @@ dbAddTraits <- function(con, data)
 #' Get trait list
 
 #' @param con a connection object as produced by dbConnect
+#' @return a data.frame for all traits in the data base
 #' @export
 dbGetTraits <- function(con)
 {
