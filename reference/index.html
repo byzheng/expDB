@@ -142,12 +142,6 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="checkAlias.html">checkAlias()</a></code> </p>
-        </td>
-        <td><p>Get index id by name.</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="createBarcode.html">createBarcode()</a></code> </p>
         </td>
         <td><p>Create labels with barcode</p></td>
@@ -280,12 +274,6 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="dbGetDBName.html">dbGetDBName()</a></code> </p>
-        </td>
-        <td><p>Get the database file name</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="dbGetDryWeightPerStem.html">dbGetDryWeightPerStem()</a></code> </p>
         </td>
         <td><p>Get the dry weight per stem</p></td>
@@ -370,12 +358,6 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="dbGetPhenotype_.html">dbGetPhenotype_()</a></code> </p>
-        </td>
-        <td><p>Get phenotype values through a group of conditions</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="dbGetPlantFlowering.html">dbGetPlantFlowering()</a></code> </p>
         </td>
         <td><p>Estimation of flowering time</p></td>
@@ -418,21 +400,9 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="dbGetStemTillerNumber.html">dbGetStemTillerNumber()</a></code> </p>
-        </td>
-        <td><p>Estimation of stem/tiller number per unit area or plant</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="dbGetTraits.html">dbGetTraits()</a></code> </p>
         </td>
         <td><p>Get trait list</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dbGetTreatmentColumns.html">dbGetTreatmentColumns()</a></code> </p>
-        </td>
-        <td><p>Get the unique columns for a treatment</p></td>
       </tr><tr>
         
         <td>
@@ -472,12 +442,6 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="defaultMeasurement.html">defaultMeasurement()</a></code> </p>
-        </td>
-        <td><p>Import a normal measurement</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="expdbConnect.html">expdbConnect()</a></code> </p>
         </td>
         <td><p>Connect to expDB</p></td>
@@ -496,18 +460,6 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="generateName.html">generateName()</a></code> </p>
-        </td>
-        <td><p>Generate unique name with digest method</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="getAlias.html">getAlias()</a></code> </p>
-        </td>
-        <td><p>Alias of column names</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="getIdByUniqueIndex.html">getIdByUniqueIndex()</a></code> </p>
         </td>
         <td><p>Get index id by unique_columns.</p></td>
@@ -517,56 +469,6 @@
           <p><code><a href="harvestQuadratDetail.html">harvestQuadratDetail()</a></code> </p>
         </td>
         <td><p>Process quadrat (detail) harvestQuadratDetail</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="measurementLeafSize.html">measurementLeafSize()</a></code> </p>
-        </td>
-        <td><p>Import the measurement of leaf size</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sqlIn.html">sqlIn()</a></code> </p>
-        </td>
-        <td><p>Paste a vector to format used for SQL in</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="system_file.html">system_file()</a></code> </p>
-        </td>
-        <td><p>#' Write tables into xlsx files
-#'
-#' @param file The xlsx file
-#' @param ... Pairs of table and values
-#' @export
-write2Xlsx &lt;- function(file, ...) 
-    tbls &lt;- list(...)
-    sheet_name &lt;- names(tbls)
-    newWB &lt;- XLConnect::loadWorkbook(filename = file, create = TRUE)
-    for(i in seq(along = tbls))
-        XLConnect::createSheet(newWB, name = sheet_name[i])
-        writeWorksheet(
-            newWB,
-            data = as.data.frame(tbls[[i]]),
-            sheet = sheet_name[i],
-            header = TRUE,
-            rownames = NULL)
-    
-    saveWorkbook(newWB)
-
-System based file path</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="xlsxToR.html">xlsxToR()</a></code> </p>
-        </td>
-        <td><p>Read xlsx files</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="yearDay2Date.html">yearDay2Date()</a></code> </p>
-        </td>
-        <td><p>Convert year and day of year to date</p></td>
       </tr>
     </tbody>
     </table>
