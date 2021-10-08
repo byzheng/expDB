@@ -14,10 +14,10 @@ R interface for expDB which is used to store experiment-based data.
 
 ## Database design
 
-A [SQLite](http://www.sqlite.org) database is used to store all information of experiment-based data. 
+A [SQLite](https://www.sqlite.org/index.html) database is used to store all information of experiment-based data. 
 
 * Researchers collect the basic information about researchers, e.g. name, email, etc.
-* ApSoils specify the soil name in the ApSoils which distribute with [APSIM](http://www.apsim.info).
+* ApSoils specify the soil name in the ApSoils which distribute with [APSIM](https://www.apsim.info/).
 
 * Sites collect the basic information about experiment fields, e.g. name, latitude, longitude, soil, etc. The soil must be the same in the table ApSoils.
 * Met specify the information about weather records, e.g. type and filename. The valid met types include “daily” and “hourly”.
@@ -31,7 +31,7 @@ A [SQLite](http://www.sqlite.org) database is used to store all information of e
 
 ## Import data
 
-The experiment-based data can be imported from a excel file which supports by [readxl](https://cran.r-project.org/web/packages/readxl/index.html) package. expDB is case-insensitive. The Australia style should be used for all date related fields (dd/mm/yyyy).
+The experiment-based data can be imported from a excel file which supports by [readxl](https://CRAN.R-project.org/package=readxl) package. expDB is case-insensitive. The Australia style should be used for all date related fields (dd/mm/yyyy).
 
 ## Traits
 The processes of plant growth and development can be classified into several hierarchical levels, e.g. biosphere, ecosystem or cropping system, field or plot, whole plant, plant organ, cell, molecule, atom, and subatomic particle (Hodges 1991). We could collect data from field, plant, organ in an agricultural experiment. The values in the higher levels can be derived from lower levels. In most cases, we don't directly record data in levels above, but through specific protocol. These observations are used to derive values in other levels. For example, population is converted from the establishment counts; dry weights of leaves, stems, and heads are converted from quadrat harvest. An extra level, measurement is added into the convention.
