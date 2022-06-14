@@ -3,9 +3,9 @@
 ![R-CMD-check](https://github.com/byzheng/expDB/workflows/R-CMD-check/badge.svg)
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/expDB)](https://cran.r-project.org/package=expDB)
 
-[![](http://cranlogs.r-pkg.org/badges/grand-total/expdb?color=green)](https://cran.r-project.org/package=expdb)
-[![](http://cranlogs.r-pkg.org/badges/last-month/expdb?color=green)](https://cran.r-project.org/package=expdb)
-[![](http://cranlogs.r-pkg.org/badges/last-week/expdb?color=green)](https://cran.r-project.org/package=expdb)
+[![](http://cranlogs.r-pkg.org/badges/grand-total/expDB?color=green)](https://cran.r-project.org/package=expDB)
+[![](http://cranlogs.r-pkg.org/badges/last-month/expDB?color=green)](https://cran.r-project.org/package=expDB)
+[![](http://cranlogs.r-pkg.org/badges/last-week/expDB?color=green)](https://cran.r-project.org/package=expDB)
 
 
 
