@@ -22,6 +22,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -34,18 +36,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">expDB</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -55,7 +51,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/byzheng/expdb/">
+  <a href="https://github.com/byzheng/expdb/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -72,29 +68,29 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="expdb" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#expdb" class="anchor"></a>expDB</h1></div>
+<div class="section level1">
+<div class="page-header"><h1 id="expdb">expDB<a class="anchor" aria-label="anchor" href="#expdb"></a>
+</h1></div>
 
-<p><a href="https://cran.r-project.org/package=expdb"><img src="http://cranlogs.r-pkg.org/badges/grand-total/expdb?color=green"></a> <a href="https://cran.r-project.org/package=expdb"><img src="http://cranlogs.r-pkg.org/badges/last-month/expdb?color=green"></a> <a href="https://cran.r-project.org/package=expdb"><img src="http://cranlogs.r-pkg.org/badges/last-week/expdb?color=green"></a></p>
+<p><a href="https://cran.r-project.org/package=expDB" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/grand-total/expDB?color=green"></a> <a href="https://cran.r-project.org/package=expDB" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/last-month/expDB?color=green"></a> <a href="https://cran.r-project.org/package=expDB" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/last-week/expDB?color=green"></a></p>
 <p>R interface for expDB which is used to store experiment-based data.</p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <p>Install from CRAN.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">'rapsimng'</span><span class="op">)</span></code></pre></div>
-<p>Install the developing version from <a href="https://github.com/byzheng/expdb">Github</a>.</p>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'rapsimng'</span><span class="op">)</span></code></pre></div>
+<p>Install the developing version from <a href="https://github.com/byzheng/expdb" class="external-link">Github</a>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">'byzheng/expdb'</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="database-design" class="section level2">
-<h2 class="hasAnchor">
-<a href="#database-design" class="anchor"></a>Database design</h2>
-<p>A <a href="https://www.sqlite.org/index.html">SQLite</a> database is used to store all information of experiment-based data.</p>
+<div class="section level2">
+<h2 id="database-design">Database design<a class="anchor" aria-label="anchor" href="#database-design"></a>
+</h2>
+<p>A <a href="https://www.sqlite.org/index.html" class="external-link">SQLite</a> database is used to store all information of experiment-based data.</p>
 <ul>
 <li><p>Researchers collect the basic information about researchers, e.g. name, email, etc.</p></li>
-<li><p>ApSoils specify the soil name in the ApSoils which distribute with <a href="https://www.apsim.info/">APSIM</a>.</p></li>
+<li><p>ApSoils specify the soil name in the ApSoils which distribute with <a href="https://www.apsim.info/" class="external-link">APSIM</a>.</p></li>
 <li><p>Sites collect the basic information about experiment fields, e.g. name, latitude, longitude, soil, etc. The soil must be the same in the table ApSoils.</p></li>
 <li><p>Met specify the information about weather records, e.g. type and filename. The valid met types include “daily” and “hourly”.</p></li>
 <li><p>Genotypes collect genotype name and other information.</p></li>
@@ -106,14 +102,14 @@
 <li><p>Fertilization collect the fertilization information to some trials, e.g. date, fertilizer, amount, etc.</p></li>
 </ul>
 </div>
-<div id="import-data" class="section level2">
-<h2 class="hasAnchor">
-<a href="#import-data" class="anchor"></a>Import data</h2>
-<p>The experiment-based data can be imported from a excel file which supports by <a href="https://CRAN.R-project.org/package=readxl">readxl</a> package. expDB is case-insensitive. The Australia style should be used for all date related fields (dd/mm/yyyy).</p>
+<div class="section level2">
+<h2 id="import-data">Import data<a class="anchor" aria-label="anchor" href="#import-data"></a>
+</h2>
+<p>The experiment-based data can be imported from a excel file which supports by <a href="https://CRAN.R-project.org/package=readxl" class="external-link">readxl</a> package. expDB is case-insensitive. The Australia style should be used for all date related fields (dd/mm/yyyy).</p>
 </div>
-<div id="traits" class="section level2">
-<h2 class="hasAnchor">
-<a href="#traits" class="anchor"></a>Traits</h2>
+<div class="section level2">
+<h2 id="traits">Traits<a class="anchor" aria-label="anchor" href="#traits"></a>
+</h2>
 <p>The processes of plant growth and development can be classified into several hierarchical levels, e.g. biosphere, ecosystem or cropping system, field or plot, whole plant, plant organ, cell, molecule, atom, and subatomic particle (Hodges 1991). We could collect data from field, plant, organ in an agricultural experiment. The values in the higher levels can be derived from lower levels. In most cases, we don’t directly record data in levels above, but through specific protocol. These observations are used to derive values in other levels. For example, population is converted from the establishment counts; dry weights of leaves, stems, and heads are converted from quadrat harvest. An extra level, measurement is added into the convention.</p>
 <table class="table">
 <thead><tr class="header">
@@ -146,23 +142,23 @@
 </table>
 <p>A list of traits are provided in the released version of expDB.</p>
 </div>
-<div id="extraction-of-observations-from-datasets" class="section level2">
-<h2 class="hasAnchor">
-<a href="#extraction-of-observations-from-datasets" class="anchor"></a>Extraction of observations from datasets</h2>
+<div class="section level2">
+<h2 id="extraction-of-observations-from-datasets">Extraction of observations from datasets<a class="anchor" aria-label="anchor" href="#extraction-of-observations-from-datasets"></a>
+</h2>
 <p>The low level function <code>dbGetPhenotype</code> is provided to extract the raw observations from database. Some traits can be observed or calculated from other traits.</p>
-<div id="population" class="section level3">
-<h3 class="hasAnchor">
-<a href="#population" class="anchor"></a>Population</h3>
+<div class="section level3">
+<h3 id="population">Population<a class="anchor" aria-label="anchor" href="#population"></a>
+</h3>
 <p>The plant population (<code>F_Population</code>) is defined as the number of plants in unit area. <code>F_Population</code> is retrived from database, then calculated from measurement establishment count (<code>M_EstablishmentCount</code>) and row spacing (<code>RowSpacing</code>). The density is assumed to equal to population if none of above traits are specified in the database.</p>
 </div>
-<div id="final-leaf-number" class="section level3">
-<h3 class="hasAnchor">
-<a href="#final-leaf-number" class="anchor"></a>Final leaf number</h3>
+<div class="section level3">
+<h3 id="final-leaf-number">Final leaf number<a class="anchor" aria-label="anchor" href="#final-leaf-number"></a>
+</h3>
 <p>Final leaf number (<code>O_FinalLeafNumber</code>) is defined as the total completed leaf number of a fertile stem after head emergence (main stem and tillers). <code>O_FinalLeafNumber</code> is retrived from database, then calculated from Haun Index. Huan Index is assumed the full expanded flag leaf is recorded. Consequently the maximum integer value in the observations is treated as the <code>O_FinalLeafNumber</code>.</p>
 </div>
-<div id="stemtiller-numbers-for-field-and-plant" class="section level3">
-<h3 class="hasAnchor">
-<a href="#stemtiller-numbers-for-field-and-plant" class="anchor"></a>Stem/tiller numbers for field and plant</h3>
+<div class="section level3">
+<h3 id="stemtiller-numbers-for-field-and-plant">Stem/tiller numbers for field and plant<a class="anchor" aria-label="anchor" href="#stemtiller-numbers-for-field-and-plant"></a>
+</h3>
 <p>The stem/tiller numbers are defined as the number stems/tillers per unit area and per plant. The relationships among 4 traits are as follows.</p>
 <p><br><span class="math display"><em>P</em>_<em>S</em><em>t</em><em>e</em><em>m</em><em>N</em><em>u</em><em>m</em><em>b</em><em>e</em><em>r</em> = <em>P</em>_<em>T</em><em>i</em><em>l</em><em>l</em><em>e</em><em>r</em><em>N</em><em>u</em><em>m</em><em>b</em><em>e</em><em>r</em> + 1</span><br><br><span class="math display"><em>F</em>_<em>S</em><em>t</em><em>e</em><em>m</em><em>N</em><em>u</em><em>m</em><em>b</em><em>e</em><em>r</em> = <em>P</em>_<em>S</em><em>t</em><em>e</em><em>m</em><em>N</em><em>u</em><em>m</em><em>b</em><em>e</em><em>r</em> × <em>F</em>_<em>P</em><em>o</em><em>p</em><em>u</em><em>l</em><em>a</em><em>t</em><em>i</em><em>o</em><em>n</em></span><br><br><span class="math display"><em>F</em>_<em>T</em><em>i</em><em>l</em><em>l</em><em>e</em><em>r</em><em>N</em><em>u</em><em>m</em><em>b</em><em>e</em><em>r</em> = <em>P</em>_<em>T</em><em>i</em><em>l</em><em>l</em><em>e</em><em>r</em><em>N</em><em>u</em><em>m</em><em>b</em><em>e</em><em>r</em> × <em>F</em>_<em>P</em><em>o</em><em>p</em><em>u</em><em>l</em><em>a</em><em>t</em><em>i</em><em>o</em><em>n</em></span><br><br><span class="math display"><em>F</em>_<em>S</em><em>t</em><em>e</em><em>m</em><em>N</em><em>u</em><em>m</em><em>b</em><em>e</em><em>r</em> = (<em>P</em>_<em>T</em><em>i</em><em>l</em><em>l</em><em>e</em><em>r</em><em>N</em><em>u</em><em>m</em><em>b</em><em>e</em><em>r</em> + 1) × <em>F</em>_<em>P</em><em>o</em><em>p</em><em>u</em><em>l</em><em>a</em><em>t</em><em>i</em><em>o</em><em>n</em></span><br></p>
 <p>The stem/tiller numbers are retrived from observations, then calculated by other traits.</p>
@@ -173,53 +169,63 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=expDB">https://​cloud.r-project.org/​package=expDB</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/byzheng/expdb/">https://​github.com/​byzheng/​expdb/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/byzheng/expdb/issues">https://​github.com/​byzheng/​expdb/​issues</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=expDB" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/byzheng/expdb/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/byzheng/expdb/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li>
-<a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a>
+<a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a>
 </li>
 </ul>
 </div>
+
 <div class="community">
-<h2>Community</h2>
+<h2 data-toc-skip>Community</h2>
 <ul class="list-unstyled">
 <li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
 </ul>
 </div>
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing expDB</a></li>
+</ul>
+</div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Bangyou Zheng <br><small class="roles"> Author, maintainer </small>  </li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://cran.r-project.org/package=expDB"><img src="http://www.r-pkg.org/badges/version/expDB" alt="CRAN_Status_Badge"></a></li>
+<li><a href="https://cran.r-project.org/package=expDB" class="external-link"><img src="http://www.r-pkg.org/badges/version/expDB" alt="CRAN_Status_Badge"></a></li>
 </ul>
 </div>
-</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Bangyou Zheng.</p>
+  <p></p>
+<p>Developed by Bangyou Zheng.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer>
@@ -227,6 +233,8 @@
 
   
 
+
+  
 
   </body>
 </html>
