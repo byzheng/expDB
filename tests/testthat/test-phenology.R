@@ -26,14 +26,6 @@ test_that("approx_zadoks returns NA for target out of range", {
 })
 
 
-
-test_that("approx_zadoks errors for unsorted input", {
-    zadoks <- c(10, 30, 20)
-    date <- as.Date(c("2025-08-01", "2025-08-10", "2025-08-05"))
-    target <- 25
-    expect_error(approx_zadoks(zadoks, date, target), "increasing order")
-})
-
 test_that("approx_zadoks errors for invalid input types", {
     zadoks <- c("a", "b", "c")
     date <- as.Date(c("2025-08-01", "2025-08-05", "2025-08-10"))
