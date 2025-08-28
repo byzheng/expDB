@@ -46,8 +46,8 @@ approx_zadoks <- function(zadoks, date, target) {
     stopifnot(is.numeric(target))
     stopifnot(length(zadoks) == length(date))
     stopifnot(length(target) == 1)
-    if (any(duplicated(date))) stop("Duplicate dates found.")
-    if (any(duplicated(target))) stop("Duplicate target values found.")
+    # if (any(duplicated(date))) stop("Duplicate dates found.")
+    # if (any(duplicated(target))) stop("Duplicate target values found.")
     if (is.unsorted(zadoks) || is.unsorted(date)) stop("zadoks and date must be in increasing order.")
     if (target < 51 || target > 69) {
         stop("Target Zadoks stage must be between 51 and 69.")

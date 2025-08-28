@@ -32,7 +32,7 @@ dbAddMets <- function(con, data)
     # Check existing met file
     unique_id <- getIdByUniqueIndex(con, 
                 'expdb_met', data, 'name')
-    if (class(con) == 'MySQLConnection') {
+    if (inherits(con, 'MySQLConnection')) {
         for (i in seq(length = nrow(data)))
         {
             if (!is.na(unique_id[i]))
@@ -43,7 +43,7 @@ dbAddMets <- function(con, data)
             dbInsertUpdateByRow(con, 'expdb_met', data, 
                                 unique_col = 'name')
         }
-    } else if (class(con) == 'SQLiteConnection') {
+    } else if (inherits(con, 'SQLiteConnection')) {
         file_lim <- 300
         for (i in seq(length = nrow(data)))
         {
@@ -141,13 +141,13 @@ dbAddMets <- function(con, data)
 #' @export
 dbAddWeather <- function(con, data, name=NULL)
 {
-  
-  if (class(data) == 'character')
+
+  if (inherits(data, 'character'))
   {
     stop('NOT implemented')   
     # records <- readWeatherRecords(data)
     # records <- getWeatherRecords(records)
-  } else if (class(data) == 'WeaAna')
+  } else if (inherits(data, 'WeaAna'))
   {
     if (is.null(name))
     {
@@ -163,7 +163,7 @@ dbAddWeather <- function(con, data, name=NULL)
       stop('met id doesn\'t exist')
     }
     records <- weaana::getWeatherRecords(data)
-  } else if (class(data) == 'data.frame')
+  } else if (inherits(data, 'data.frame'))
   {
     met_id <- getIdByUniqueIndex(con, 'expdb_met', name)
     if (sum(is.na(met_id)) > 0)
@@ -175,9 +175,9 @@ dbAddWeather <- function(con, data, name=NULL)
   {
     stop('NOT implemented')
   }
-  if (class(con) == 'MySQLConnection') {
-    
-    
+  if (inherits(con, 'MySQLConnection')) {
+
+
     sql <- sprintf('SELECT * FROM expdb_met WHERE id = %s', met_id)
     met_meta <- DBI::dbGetQuery(con, sql)
     
@@ -196,10 +196,10 @@ dbAddWeather <- function(con, data, name=NULL)
     } else {
         warning("Not implemented")
     }
-    
-  } else if (class(con) == 'SQLiteConnection') {
-    
-    
+
+  } else if (inherits(con, 'SQLiteConnection')) {
+
+
     sql <- sprintf('SELECT M.id, M.type, F.name as filename
     FROM expdb_met M LEFT OUTER JOIN expdb_met_file F ON 
     M.[file_id]=F.[id] WHERE M.id = %s', met_id)

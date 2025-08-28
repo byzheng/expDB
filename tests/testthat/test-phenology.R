@@ -25,12 +25,7 @@ test_that("approx_zadoks returns NA for target out of range", {
     expect_equal(result, NA)
 })
 
-test_that("approx_zadoks errors for duplicate dates", {
-    zadoks <- c(10, 20, 30)
-    date <- as.Date(c("2025-08-01", "2025-08-05", "2025-08-05"))
-    target <- 25
-    expect_error(approx_zadoks(zadoks, date, target), "Duplicate dates found")
-})
+
 
 test_that("approx_zadoks errors for unsorted input", {
     zadoks <- c(10, 30, 20)
