@@ -34,6 +34,6 @@ Imports: DBI,
          reshape2,
          stringr,
          rlang
-RoxygenNote: 7.1.2
+RoxygenNote: 7.3.2
 Suggests: 
     testthat
