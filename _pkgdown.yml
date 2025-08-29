@@ -1,4 +1,6 @@
+url: https://expdb.bangyou.me/
 template:
+  bootstrap: 5
   includes:
     in_header: |
         <!-- Google tag (gtag.js) -->
@@ -10,3 +12,4 @@ template:
 
           gtag('config', 'G-4HPNYGL5FT');
         </script>
+
