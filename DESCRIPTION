@@ -1,7 +1,7 @@
 Package: expDB
 Type: Package
 Title: Database for Experiment Dataset
-Version: 0.1.0
+Version: 0.3.0
 Maintainer: Bangyou Zheng <bangyou.zheng@csiro.au>
 Authors@R: person("Bangyou", "Zheng", 
                email = "bangyou.zheng@csiro.au", 
